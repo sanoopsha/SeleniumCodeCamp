@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,8 +35,12 @@ public class FirstSeleniumTest {
 
         WebElement password = driver.findElement(By.name("password"));
         password.sendKeys("admin123");
-        Thread.sleep(2000);
         driver.findElement(By.xpath("//button[contains(@class, 'orangehrm-login-button')]")).click();
+        Thread.sleep(4000);
+
+        String actualResult = driver.findElement(By.xpath("//h6[text()='Dashboard']")).getText();
+        String expectedResult = "Dashboard";
+        Assert.assertEquals(actualResult,expectedResult);
     }
 
 }
